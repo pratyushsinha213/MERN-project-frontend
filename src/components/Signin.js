@@ -20,7 +20,7 @@ export default function Signin() {
             if (res.status === 200) {
                 alert("Sign In SUCCESSFUL!!!");
                 login(); // Update the authentication state
-
+                
                 localStorage.setItem('token', res.data.token); // Save the token
 
                 navigate("/create-event");

@@ -4,6 +4,7 @@ import EventPhoto from '../assets/event-picture.png'
 
 export default function EventListRow(props) {
     const { _id, name, description, ticketsAvailable, eventDate } = props.obj;
+    const navigate = useNavigate();
 
     const getToken = () => localStorage.getItem('token');
 
@@ -15,6 +16,7 @@ export default function EventListRow(props) {
             .then((res) => {
                 if (res.status === 200) {
                     alert("Record is deleted");
+                    navigate("/event-list");
                     window.location.reload();
                 } else {
                     Promise.reject();
@@ -35,7 +37,7 @@ export default function EventListRow(props) {
                 .then((res) => {
                     if (res.status === 200) {
                         alert("Ticket purchased SUCCESSFULLY!!");
-                        window.location.reload();
+                        navigate("/create-event");
                     } else {
                         Promise.reject();
                     }

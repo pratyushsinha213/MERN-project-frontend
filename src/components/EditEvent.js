@@ -5,15 +5,16 @@ import Axios from "axios";
 
 export default function EditEvent() {
     const { id } = useParams();
-    const [initialValue, setInitialValue] = useState({ name: "", description: "", ticketsAvailable: "", eventDate: "" });
+    // const [initialValue, setInitialValue] = useState({ name: "", description: "", ticketsAvailable: "", eventDate: "" });
+    const [initialValue, setInitialValue] = useState({ name: "", description: "", ticketsAvailable: ""});
     const [newData,setNewData]=useState([]);
 
     useEffect(() => {
         Axios.get("https://mern-project-backend-deploy.onrender.com/eventRoute/update-event/" + id)
         .then((res) => {
             if (res.status === 200) {
-                const { name, description, ticketsAvailable, eventDate } = res.data;
-                setInitialValue({ name, description, ticketsAvailable, eventDate: new Date(eventDate).toISOString().split('T')[0] });
+                const { name, description, ticketsAvailable } = res.data;
+                setInitialValue({ name, description, ticketsAvailable});
             } else {
                 Promise.reject();
             }
@@ -29,7 +30,7 @@ export default function EditEvent() {
 
 
     const handleSubmit =()=>{
-        const data={name: newData[0], description: newData[1], ticketsAvailable: newData[2], eventDate: newData[3]}
+        const data={name: newData[0], description: newData[1], ticketsAvailable: newData[2]}
         Axios.put("https://mern-project-backend-deploy.onrender.com/eventRoute/update-event/"+id,data)
         .then((res)=>{
             if(res.status === 200)
@@ -48,7 +49,6 @@ export default function EditEvent() {
                 nameValue={initialValue.name} 
                 descriptionValue={initialValue.description} 
                 ticketsAvailableValue={initialValue.ticketsAvailable}
-                eventDateValue={initialValue.eventDate}
             > Update Event Details
             </EventForm>
         </form>

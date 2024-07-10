@@ -60,7 +60,8 @@ export default function EventForm(props) {
                     type="date"
                     id="eventDate"
                     className="form-control"
-                    value={eventDate}
+                    // value={eventDate}
+                    value={eventDate ? new Date(eventDate).toISOString().split('T')[0] : ''}
                     onChange={(event) => setEventDate(event.target.value)}
                 />
             </div>
