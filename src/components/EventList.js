@@ -21,7 +21,8 @@ export default function EventList() {
         setSearchQuery(event.target.value);
     };
 
-    const filteredEvents = arr.filter(event =>
+    const filteredEvents = arr.filter(event => 
+        event.name && typeof event.name === "string" && 
         event.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
